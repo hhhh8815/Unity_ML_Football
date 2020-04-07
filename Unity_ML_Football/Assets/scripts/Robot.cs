@@ -4,6 +4,7 @@ using MLAgents.Sensors;
 
 public class Robot : Agent
 {
+    
     [Header("速度"), Range(1, 50)]
     public float speed = 10;
     /// <summary>
@@ -54,6 +55,7 @@ public class Robot : Agent
         sensor.AddObservation(rigBall.position);
         sensor.AddObservation(rigRobot.velocity.x);
         sensor.AddObservation(rigRobot.velocity.z);
+        
 
     }
 
@@ -62,11 +64,13 @@ public class Robot : Agent
     /// </summary>
     public override void OnActionReceived(float[] vectorAction)
     {
+        
         //使用參數控制機器人
         Vector3 control = Vector3.zero;
         control.x = vectorAction[0];
         control.z = vectorAction[1];
         rigRobot.AddForce(control * speed);
+        
 
         //球進入球門，成功：加 1 分並結束
         if (Ball.complete)
